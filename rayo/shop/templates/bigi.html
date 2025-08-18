@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+{{pname}}
+{% endblock %}
+
+{% block body %}
+<div class="category-header fade-in">
+    <h1 class="category-title">{{pname}}</h1>
+    <p class="category-description">Browse our collection of {{pname}} products</p>
+</div>
+
+<div class="product-grid">
+    {% for sc in bc.items %}
+    <div class="product-card fade-in">
+        <div class="product-image-container">
+            <img src="{{sc.1.image.url}}" alt="{{sc.0}}" class="product-image">
+        </div>
+        <div class="product-info">
+            <h2 class="product-title">{{sc.0}}</h2>
+            <div class="product-price">${{sc.1.price}}</div>
+            {% if sc.1.off %}
+            <div class="product-off">{{sc.1.off}}% OFF</div>
+            {% endif %}
+            <a href="{% url 'shop:sml' sc.0 %}" class="view-more">View Collection</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+

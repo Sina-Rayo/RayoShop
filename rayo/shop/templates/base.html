@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RayoShop - Your one-stop shop for all your needs">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'shop_style.css' %}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="head">
+            <a href="{% url 'shop:main' %}" class="logo">RayoShop</a>
+
+            <div class="info">
+                <p id="info">Email: SinaRayo8414@gmail.com</p>
+                <p id="info">Phone: 09901464060</p>
+            </div>
+            
+            <form class="search" method="GET" action="{% url 'shop:main' %}">
+                <input id="search_bar" name="q" placeholder="جست و جو کنید" type="text">
+                <button id="search_bton" type="submit">جست و جو</button>
+            </form>
+        </header>
+
+        <nav class="catdiv">
+            {% for bc in categ.items %}
+            <details class="big_category">
+                <summary id="bic">{{bc.0}}</summary>
+                <div class="dropdown-wrapper">
+                    {% for sc in bc.1.items %}
+                    <a href="{% url 'shop:sml' sc.0 %}" id="smlc">{{sc.0}}</a>
+                    {% endfor %}
+                </div>
+            </details>
+            {% endfor %}
+        </nav>
+
+        <main>
+            {% block body %}
+            {% endblock %}
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categories = document.querySelectorAll('.big_category');
+            
+            categories.forEach(category => {
+                let timeout;
+                
+                category.addEventListener('mouseenter', () => {
+                    clearTimeout(timeout);
+                    category.setAttribute('open', '');
+                });
+                
+                category.addEventListener('mouseleave', () => {
+                    timeout = setTimeout(() => {
+                        category.removeAttribute('open');
+                    }, 200); // Small delay to prevent flickering
+                });
+            });
+        });
+    </script>
+</body>
+</html>

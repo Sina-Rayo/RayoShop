@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block title %}
+    Create Item
+{% endblock %}
+
+{% block body %}
+<div class="create-item-container">
+    <h1 class="page-title">Create Your Item</h1>
+    
+    <form class="create-item-form" action="{% url 'shop:create' %}" method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="iname">Name</label>
+            <input type="text" id="iname" name="iname" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="iabout">Description</label>
+            <textarea id="iabout" name="iabout" rows="5" class="form-control" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label for="iprice">Price</label>
+                <input type="number" id="iprice" name="iprice" class="form-control" required>
+            </div>
+            
+            <div class="form-group half-width">
+                <label for="ioff">Discount (%)</label>
+                <input type="number" id="ioff" min="0" max="100" name="ioff" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h4 class="category-title">Select Category</h4>
+            {% for bc in categ.items %}
+                <details class="category-details">
+                    <summary class="category-summary">{{bc.0}}</summary> 
+                    <div class="subcategories">
+                        {% for sc in bc.1.items %} 
+                            <div class="radio-group">
+                                <input type="radio" id="scat_{{sc.0}}" name="categor" value="{{sc.0}}" required>
+                                <label for="scat_{{sc.0}}">{{sc.0}}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </details>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="submit-btn">Create Item</button>
+    </form>
+</div>
+
+<style>
+    .create-item-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .page-title {
+        color: #333;
+        margin-bottom: 2rem;
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    .create-item-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .half-width {
+        flex: 1;
+    }
+
+    .form-control {
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 2px rgba(74,144,226,0.2);
+    }
+
+    .category-title {
+        margin-bottom: 1rem;
+        color: #555;
+    }
+
+    .category-details {
+        margin-bottom: 1rem;
+    }
+
+    .category-summary {
+        padding: 0.75rem;
+        background: #f5f5f5;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+    .subcategories {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .radio-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .submit-btn {
+        background: #4a90e2;
+        color: white;
+        padding: 1rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+        background: #357abd;
+    }
+
+    label {
+        color: #555;
+        font-weight: 500;
+    }
+</style>
+{% endblock %}

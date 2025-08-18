@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    SignUp
+</title>
+</head>
+
+<div class="wrapper">
+
+
+<body>
+    <h1>Login</h1>
+<form class="site-form" method="post" action="{% url 'users:login' %}">
+    {% csrf_token %}
+    {{ form }}
+    {% if request.GET.next %}
+        <input name="next" type="hidden" value="{{ request.GET.next }}">
+        {% endif %}
+    <input type="submit" value="Log Me In" class="input1">
+
+<div class="signup_request"><p>dont have any account? <a href="{% url 'users:signup' %}">create one</a></p></div>
+</form>
+
+</body>
+</div>
+</html>
