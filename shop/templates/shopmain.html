@@ -7,15 +7,19 @@ Rayo Shop
 {% block body %}
 <div class="bodie">
     {% for bc in categ.items %}
+    
     <div class="body_cat fade-in">
+        <a href="{% url 'shop:big' bc.0 %}">
         <div class="category-header">
             <h2 id="big_cat_name">
-                <a href="{% url 'shop:big' bc.0 %}">{{ bc.0 }}</a>
+                <p>{{ bc.0 }}</p>
+                <!-- <a href="{% url 'shop:big' bc.0 %}">{{ bc.0 }}</a> -->
             </h2>
-        </div>
+        </div></a>
 
         <div class="product-grid">
             {% for sc in bc.1.items %}
+            <a href="{% url 'shop:sml' sc.0 %}">
             <div class="product-card fade-in">
                 <div class="product-image-container">
                     <img src="{{sc.1.image.url}}" alt="{{sc.0}}" class="product-image">
@@ -26,12 +30,12 @@ Rayo Shop
                     {% if sc.1.off %}
                     <div class="product-off">{{sc.1.off}}% OFF</div>
                     {% endif %}
-                    <a href="{% url 'shop:sml' sc.0 %}" class="view-more">View Collection</a>
+                    <!-- <a href="{% url 'shop:sml' sc.0 %}" class="view-more">View Collection</a> -->
                 </div>
             </div>
             {% endfor %}
         </div>
-    </div>
+    </div></a>
     {% endfor %}
 </div>
 {% endblock %}
