@@ -11,6 +11,7 @@
 
 <div class="product-grid">
     {% for sc in bc.items %}
+    <a href="{% url 'shop:sml' sc.0 %}" class="view-more">
     <div class="product-card fade-in">
         <div class="product-image-container">
             <img src="{{sc.1.image.url}}" alt="{{sc.0}}" class="product-image">
@@ -21,9 +22,9 @@
             {% if sc.1.off %}
             <div class="product-off">{{sc.1.off}}% OFF</div>
             {% endif %}
-            <a href="{% url 'shop:sml' sc.0 %}" class="view-more">View Collection</a>
+            
         </div>
-    </div>
+    </div></a>
     {% endfor %}
 </div>
 {% endblock %}

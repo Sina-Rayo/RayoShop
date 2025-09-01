@@ -9,8 +9,8 @@ app_name = "rayo"
 
 urlpatterns = [
     path('penhoon/', admin.site.urls),
-    path('' , views.home),
-    path('shop/' , include("shop.urls")),
+    # path('' , views.home),
+    path('' , include("shop.urls")),
     path('users/', include("users.urls"))
 ]
 
