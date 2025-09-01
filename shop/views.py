@@ -2,51 +2,52 @@ from django.shortcuts import render , HttpResponse
 from . import models
 
 categ = {
-        "موبایل و تجهیزات" : {
-            "موبایل" : "#",
-            "شارژر" : "#",
-            "قاب موبایل" : "#",
-            "تجهیزات جانبی" : "#"
-        },
-        "کامپیوتر و لپ تاپ" :{
-            "کیس کامپیوتر" : "#",
-            "مانیتور" : "#",
-            "موس و کیبورد" : "#",
-            "لپ تاپ" : "#",
-            "میز کامپیوتر" : "#",
-            "شارژر لپ تاپ" : "#"
-        },
-        "لوازم تحریر و کتاب" :{
-            "خودکار و مداد" : "#",
-            "چراغ مطالعه" : "#",
-            "کوله پشتی" : "#",
-            "دفتر" : "#",
-            "کتاب داستان" : "#"
-        },
-        "خانه و آشپزخانه" :{
-            "تلویزیون" : "#",
-            "مبل و صندلی" : "#",
-            "یخچال" : "#",
-            "ماشین لباس شویی" : "#",
-            "میز غذاخوری" : "#",
-            "فرش و موکت" : "#"
-        },
-        "ورزشی" :{
-            "توپ ورزشی" : "#",
-            "کفش ورزشی" : "#",
-            "لباس ورزشی" : "#",
-            "فلاسک" : "#",
-            "دوچرخه" : "#",
-            "دمبل و هالتر" : "#"
-        },
-        "مد و پوشاک" :{
-            "تیشرت و پیراهن" : "#",
-            "هودی" : "#",
-            "کت و کاپشن" : "#",
-            "شلوار" : "#",
-            "کفش" : "#"
-        }
+    "Mobile & Accessories": {
+        "Mobile": "#",
+        "Charger": "#",
+        "Phone Case": "#",
+        "Accessories": "#"
+    },
+    "Computer & Laptop": {
+        "Computer Case": "#",
+        "Monitor": "#",
+        "Mouse & Keyboard": "#",
+        "Laptop": "#",
+        "Computer Desk": "#",
+        "Laptop Charger": "#"
+    },
+    "Stationery & Books": {
+        "Pen & Pencil": "#",
+        "Desk Lamp": "#",
+        "Backpack": "#",
+        "Notebook": "#",
+        "Story Book": "#"
+    },
+    "Home & Kitchen": {
+        "Television": "#",
+        "Sofa & Chair": "#",
+        "Refrigerator": "#",
+        "Washing Machine": "#",
+        "Dining Table": "#",
+        "Carpet & Rug": "#"
+    },
+    "Sports": {
+        "Sports Ball": "#",
+        "Sports Shoes": "#",
+        "Sportswear": "#",
+        "Flask": "#",
+        "Bicycle": "#",
+        "Dumbbell & Barbell": "#"
+    },
+    "Fashion & Clothing": {
+        "T-Shirt & Shirt": "#",
+        "Hoodie": "#",
+        "Coat & Jacket": "#",
+        "Pants": "#",
+        "Shoes": "#"
+    }
 }
+
 
 def main_shop(request):
     

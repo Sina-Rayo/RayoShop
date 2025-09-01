@@ -26,15 +26,16 @@
             </div>
             
             <form class="search" method="GET" action="{% url 'shop:main' %}">
-                <input id="search_bar" name="q" placeholder="جست و جو کنید" type="text">
-                <button id="search_bton" type="submit">جست و جو</button>
+                <input id="search_bar" name="q" placeholder="What are you Looking for?" type="text">
+                <button id="search_bton" type="submit">Search</button>
             </form>
         </header>
 
         <nav class="catdiv">
             {% for bc in categ.items %}
             <details class="big_category">
-                <summary id="bic">{{bc.0}}</summary>
+                <summary id="bic">*</summary>
+                <!-- {{bc.0}} -->
                 <div class="dropdown-wrapper">
                     {% for sc in bc.1.items %}
                     <a href="{% url 'shop:sml' sc.0 %}" id="smlc">{{sc.0}}</a>
