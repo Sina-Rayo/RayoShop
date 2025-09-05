@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/create' , views.api_create_item , name='api_create'),
     path('api/signup' , views.api_signup , name='api_signup'),
     path('api/login' , views.api_login , name='api_login'),
+    path('api/cart' , views.api_cart , name='api_cart'),
     path('api/<slug>', views.api_item_page),
 
     path('' , views.main_shop , name="main"),

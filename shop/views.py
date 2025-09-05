@@ -111,15 +111,38 @@ def api_small_categorie(request:Request , slug):
     all_items = ItemSerializer(models.Item.objects.filter(sml_cat = slug) , many=True)
     return Response({'small_categorie':slug, 'items':all_items.data} , status.HTTP_200_OK)
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def api_item_page(request:Request , slug):
-    the_item = ItemSerializer(models.Item.objects.get(slug = slug))
-    return Response({'item':the_item.data} , status.HTTP_200_OK)
+    try:
+        the_item = models.Item.objects.get(slug = slug)
+        the_item_serialized = ItemSerializer(models.Item.objects.get(slug = slug))
+    except:
+        return Response({"detail":"Item not Found"} , status=404)
+
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            return Response({"detail": "Authentication Required"}, status=401)
+        if request.user.is_admin_or_manager():  
+            return Response({"detail": "No Cart for ADMIN and MANAGER"}, status=403)
+        
+        user = request.user
+        user.cart.add(the_item)
+        return Response({'item':the_item_serialized.data , "detail":"Added to Cart successfully"} , status.HTTP_200_OK)
+    return Response({'item':the_item_serialized.data} , status.HTTP_200_OK)
 
 @api_view(['GET'])
 def api_search(request:Request , slug):
     all_items = ItemSerializer(models.Item.objects.filter(item_name__icontains=slug) , many=True)
     return Response({'items':all_items.data} , status.HTTP_200_OK)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated]) 
+def api_cart(request:Request):
+    if request.user.is_admin_or_manager():  
+        return Response({"detail": "No Cart for ADMIN and MANAGER"}, status=403)
+    items = ItemSerializer(request.user.cart.all() , many=True)
+    return Response({"items":items.data} , status=200)
+    
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated]) 
